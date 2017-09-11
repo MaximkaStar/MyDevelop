@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HomeWork3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("5");
+            Console.WriteLine("10");
+            Console.WriteLine("21");
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            int L = int.Parse(Console.ReadLine());
+            int M = L / 100;
+            Console.WriteLine("Anwser: "); Console.WriteLine(M);
+            Console.ReadKey(true);
+
+            Console.WriteLine("");
+
+            Console.WriteLine("Please, write amount of days.");
+            int Days = int.Parse(Console.ReadLine());
+            int Week = Days / 7;
+            Console.WriteLine("Answer: "); Console.WriteLine(Week);
+            Console.ReadKey(true);
+
+        }
+    }
+}
