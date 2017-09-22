@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HW_Indec
+{
+    public class Farray
+    {
+        Pause[] Pauses;
+
+        public Farray(int maxOfElements)
+        {
+            Pauses = new Pause[maxOfElements];
+        }
+
+        public int Length
+        {
+            get
+            {
+                return Pauses.Length;
+            }
+        }
+
+        public Pause this[int index]
+        {
+            get
+            {
+                return Pauses[index];
+            }
+            set
+            {
+                Pauses[index] = value;
+            }
+        }
+    }
+}
