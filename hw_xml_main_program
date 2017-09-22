@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+
+namespace HW_XML
+{
+    class Program
+    {
+        private static XmlNode profText;
+
+        static void Main(string[] args)
+        {
+            List<Item> list = new List<Item>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load("https://habrahabr.ru/rss/interesting/");
+            XmlElement root = doc.DocumentElement;
+            foreach (XmlElement xDoc in root)
+            {
+                foreach(XmlElement elem in xDoc)
+                {
+                    if(elem.Name.Equals("item"))
+                    {
+                        Item item = new Item();
+                        item.Title = elem["title"].InnerText;
+                        item.Link = elem["link"].InnerText;
+                        item.Description = elem["description"].InnerText;
+                        item.PubDate = DateTime.Parse(elem["pubDate"].InnerText);
+                        list.Add(item);
+                    }
+                }
+            }
+
+            foreach(Item item in list)
+            {
+                Console.WriteLine(item.Title + "\n"+item.Description + " \n"+item.Link+"\n"+item.PubDate);
+            }
+
+            Console.ReadLine();
+
+            Console.Clear();
+
+            XmlDocument document = new XmlDocument();
+            document.Load("people.xml");
+            XmlElement xRoot = document.DocumentElement;
+
+            XmlElement peopElem = document.CreateElement("People");
+            XmlElement NameElem = document.CreateElement("Name");
+            XmlElement profElem = document.CreateElement("Profession");
+            
+
+            XmlText NameText = document.CreateTextNode("B.Obama");
+            XmlText specText = document.CreateTextNode("President of United States of America");
+           
+
+            NameElem.AppendChild(NameText);
+            profElem.AppendChild(profText);
+            
+
+            peopElem.AppendChild(peopElem);
+            profElem.AppendChild(profElem);
+            xRoot.AppendChild(peopElem);
+
+            document.Save("people.xml");
+
+            Console.WriteLine(document["name"]+" "+document["profesion"]);
+            Console.ReadLine();
+        }
+    }
+}
