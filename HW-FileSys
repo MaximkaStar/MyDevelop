@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace HW_FileSys
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string value;
+
+            using (FileStream fileStream = new FileStream(@"C:\temp\max.txt", FileMode.OpenOrCreate))
+            {
+                StreamReader streamReader = new StreamReader(fileStream);
+                value = streamReader.ReadToEnd();
+            }
+
+            string[] points = value.Split(' ');
+            List<int> newmaxNumbers = new List<int>();
+
+            for (int i = 0; i < points.Length; ++i)
+            {
+                int Check;
+                if (Int32.TryParse(points[i], out Check))
+                {
+                    newmaxNumbers.Add(Int32.Parse(points[i]));
+                }
+            }
+
+            int maxLast = newmaxNumbers.Count - 1;
+            int maxAlmostLast = maxLast - 1;
+            int maxElemCount = newmaxNumbers.Count;
+
+            for (int i = 0; i < maxElemCount; ++i)
+            {
+                int newElem = newmaxNumbers[maxLast] + newmaxNumbers[maxAlmostLast];
+                newmaxNumbers.Add(newElem);
+                ++maxLast;
+                ++maxAlmostLast;
+            }
+
+            using (StreamWriter streamWriter = new StreamWriter(@"C:\temp\max.txt", false, System.Text.Encoding.Default))
+            {
+                foreach (int point in newmaxNumbers)
+                {
+                    streamWriter.Write(point + " ");
+                }
+            }
+
+            using (FileStream fileStream = new FileStream(@"C:\temp\max1.txt", FileMode.OpenOrCreate))
+            {
+                StreamReader streamReader = new StreamReader(fileStream);
+                value = streamReader.ReadToEnd();
+            }
+
+            points = value.Split(' ');
+            List<int> max1 = new List<int>();
+
+            for (int i = 0; i < points.Length; ++i)
+            {
+                int Check;
+                if (Int32.TryParse(points[i], out Check))
+                {
+                    max1.Add(Int32.Parse(points[i]));
+                }
+            }
+
+            int summ = 0;
+
+            for (int i = 0; i < max1.Count; ++i)
+            {
+                summ += max1[i];
+            }
+
+            newmaxNumbers.Add(summ);
+
+            using (StreamWriter streamWriter = new StreamWriter(@"C:\temp\anwser.txt", false, System.Text.Encoding.Default))
+            {
+                streamWriter.Write(summ);
+            }
+        }
+    }
+}
