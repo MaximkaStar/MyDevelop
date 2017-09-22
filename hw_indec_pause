@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HW_Indec
+{
+    public class Pause
+    {
+        public int Value { get; set; }
+
+        public Pause()
+        {
+            Value = 1;
+        }
+
+        public Pause(int value)
+        {
+            Value = value * value;
+        }
+    }
+}
