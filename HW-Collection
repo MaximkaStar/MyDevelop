@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HW_Collection
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+
+            bool isParsed = false;
+            int countOfELements = 0;
+            int maxElem = 0;
+            int preMaxElem = 0;
+            int ammoutOfElements = 0;
+
+            for (; !isParsed;)
+            {
+                Console.Clear();
+                Console.WriteLine("Please, enter the numbers in collevtion: ");
+                isParsed = Int32.TryParse(Console.ReadLine(), out countOfELements);
+
+                if (countOfELements < 0)
+                {
+                    isParsed = false;
+                }
+                else
+                {
+                    for (int i = 0; i < countOfELements; ++i)
+                    {
+                        isParsed = false;
+                        for (; !isParsed;)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please, write a value of element : ");
+                            int element;
+                            isParsed = Int32.TryParse(Console.ReadLine(), out element);
+
+                            if (isParsed)
+                            {
+                                list.Add(element);
+
+                                if (i % 2 == 0)
+                                {
+                                    ammoutOfElements += element;
+                                }
+
+                                if (i == 0)
+                                {
+                                    maxElem = element;
+                                    preMaxElem = element;
+                                }
+                                else
+                                {
+                                    if (element > maxElem)
+                                    {
+                                        preMaxElem = maxElem;
+                                        maxElem = element;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Console.Clear();
+            for (int i = 0; i < countOfELements; ++i)
+            {
+                Console.WriteLine(i + "collection's elment = " + list[i]);
+            }
+            Console.WriteLine("pre-maximal element = {0}, sum of all even positions = {1}", preMaxElem, ammoutOfElements);
+            Console.ReadLine();
+        }
+    }
+}
